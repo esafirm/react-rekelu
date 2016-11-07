@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
+import { withGoogleMap, GoogleMap } from "react-google-maps";
+import MarkerKelu from './MarkerKelu'
 import _ from 'lodash'
 import axios from 'axios'
 import logo from './logo.svg';
@@ -36,19 +37,16 @@ class App extends Component {
   render() {
     console.log('marker', this.state.markers)
 
+    const icon = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
     const mapCenter = { lat: -6.20865032, lng: 106.8456459 }
+
     const SimpleMapExampleGoogleMap = withGoogleMap(props => (
       <GoogleMap
         defaultZoom={12}
         defaultCenter={mapCenter}
         >
-        {this.state.markers.map((marker, index) => (
-          <Marker
-            defaultPosition={{ 
-              lat: marker.profile.location.lat,
-              lng: marker.profile.location.lng
-            }}
-            />
+        {this.state.markers.map(marker => (
+          <MarkerKelu {...marker} />
         ))}
       </GoogleMap>
     ));
